@@ -1,13 +1,14 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
-<button id="create">Create</button>
+<h2>Print Page Titles</h2>
+<p><input id="separate" type="checkbox" checked /> Separate lines</p>
+<button id="print">Print</button>
 <button id="cancel">Cancel</button>
 <script>
 
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+document.getElementById('print').onclick = () => {
+  // const textbox = document.getElementById('count');
+  // const count = parseInt(textbox.value, 10);
+  const checked = document.getElementById('separate').checked;
+  parent.postMessage({ pluginMessage: { type: 'print-titles', checked } }, '*')
 }
 
 document.getElementById('cancel').onclick = () => {
