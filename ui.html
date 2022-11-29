@@ -1,12 +1,42 @@
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  h2 {
+    font-size: 32px;
+    margin: 0;
+  }
+
+  button {
+    background-color: #9C23E5;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    width: 100px;
+    height: 40px;
+  }
+
+  button.secondary {
+    background-color: #fff;
+    color: #9C23E5;
+    border: 2px solid #9C23E5;
+  }
+
+  p {
+    margin: 1em 0;
+  }
+
+</style>
+
 <h2>Print Page Titles</h2>
-<p><input id="separate" type="checkbox" checked /> Separate lines</p>
+<p><input id="separate" type="checkbox" checked /><label for="separate"> Separate lines</label></p>
 <button id="print">Print</button>
-<button id="cancel">Cancel</button>
+<button id="cancel" class="secondary">Cancel</button>
+
 <script>
 
 document.getElementById('print').onclick = () => {
-  // const textbox = document.getElementById('count');
-  // const count = parseInt(textbox.value, 10);
   const isSeparateLines = document.getElementById('separate').checked;
   parent.postMessage({ pluginMessage: { type: 'print-titles', isSeparateLines } }, '*')
 }
