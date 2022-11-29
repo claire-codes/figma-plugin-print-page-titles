@@ -29,31 +29,35 @@ figma.ui.onmessage = async msg => {
     console.log(msg.isSeparateLines);
 
     let pages = figma.currentPage.parent?.children || [];
-    let pageTitles = [];
-    let title = '';
-    let allTitles = '';
+    let totalPages = pages.length;
+    let startingX = figma.viewport.center.x;
+    let startingY = figma.viewport.center.y;
 
     if (msg.isSeparateLines) {
-      for (let i = 0; i < pages.length; i++) {
-        title = pages[i].name;
-        pageTitles.push(title);
+
+      for (let i = 0; i < totalPages; i++) {
         const text = figma.createText();
-        text.y = i * 20;
+        text.x = startingX;
+        text.y = startingY + (i * 20);
         await figma.loadFontAsync({ family: "Inter", style: "Regular" });
-        text.characters = title;
+        text.characters = pages[i].name;
       }
+
     } else {
-      for (let i = 0; i < pages.length; i++) {
+
+      let allTitles = '';
+
+      for (let i = 0; i < totalPages; i++) {
         if (i != 0) {
           allTitles += '\r\n';
         }
-        title = pages[i].name;
-        pageTitles.push(title);
-        allTitles += title;
+        allTitles += pages[i].name;
       }
 
       const text = figma.createText();
       await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+      text.x = startingX;
+      text.y = startingY;
       text.characters = allTitles;
     }
   }
