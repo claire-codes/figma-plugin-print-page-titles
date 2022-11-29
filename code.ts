@@ -26,14 +26,14 @@ figma.ui.onmessage = async msg => {
     figma.currentPage.selection = nodes;
     figma.viewport.scrollAndZoomIntoView(nodes);
 
-    console.log(msg.checked);
+    console.log(msg.isSeparateLines);
 
     let pages = figma.currentPage.parent?.children || [];
     let pageTitles = [];
     let title = '';
     let allTitles = '';
 
-    if (msg.checked) {
+    if (msg.isSeparateLines) {
       for (let i = 0; i < pages.length; i++) {
         title = pages[i].name;
         pageTitles.push(title);
